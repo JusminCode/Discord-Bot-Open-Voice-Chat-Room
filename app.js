@@ -51,9 +51,14 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
                 parent: category, // ตั้งห้องในหมวดหมู่ที่กำหนด
                 userLimit: userLimit, // จำกัดจำนวนผู้ใช้ในห้อง
                 permissionOverwrites: [
+                    {
+                        id: guild.roles.everyone.id,
+                        deny: [PermissionsBitField.Flags.Connect, PermissionsBitField.Flags.Speak], // ไม่ให้ Connect และ Speak
+                    },
                     ...roleIdCanJoin.map(roleId => ({
                         id: roleId,
                         allow: [PermissionsBitField.Flags.ViewChannel], // ใช้ PermissionFlags สำหรับ ViewChannel
+                        deny: [PermissionsBitField.Flags.Speak], // ไม่ให้พูดในห้อง
                     })),
                     ...roleIdCanSpeak.map(roleId => ({
                         id: roleId,

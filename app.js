@@ -98,7 +98,8 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
 
             // alert ข้อความ Tag everyone ไปที่ห้อง ID : 1326586294351954001 ว่ามีห้องใหม่ถูกสร้างขึ้น
             const alertChannel = await guild.channels.fetch('1326586294351954001');
-            await alertChannel.send(`[กำลังทดสอบระบบ] @${newState.member.displayName} ได้ทำการไลฟ์สตรีมแล้วที่ Tiktok ห้องพูดคุย >>>> **${newChannel.name}**  @everyone`);
+            //Room ที่ถูกสร้างขึ้น โดยการสร้างลิ้งค์ไปห้องนั้นๆ
+            await alertChannel.send(`${newState.member.displayName} ได้ทำการไลฟ์สตรีมแล้วที่ Tiktok ห้องพูดคุย ${newChannel.toString()} @everyone`);
         } catch (error) {
             console.error('Error creating VC room:', error);
         }
